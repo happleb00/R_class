@@ -1,3 +1,11 @@
+# Repositoty specific ignores
+*.zip
+extra_data/*
+
+
+
+
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
