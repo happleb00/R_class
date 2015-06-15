@@ -1,10 +1,10 @@
 ##need to add text about the file here
 
 pollutantmean <- function(directory, pollutant, id = 1:332) {
-	files_list <- list.files(directory, full.names = TRUE)
-	dat <- data.frame()
-	for (i in id) {
-		dat <- rbind(dat, read.csv(files_list[i]))
+	files_list <- list.files(directory, full.names = TRUE)       ##calls data from all .csv in the folder
+	dat <- data.frame()                                          ##creates empty data frame for rbind
+	for (i in id) {                                              ##creates a loop
+		dat <- rbind(dat, read.csv(files_list[i]))                 ##puts all .csv data in one frame
 		}
-	mean(dat[,pollutant], na.rm=TRUE)
+	mean(dat[,pollutant], na.rm=TRUE)                            ##what i want to do with the data called
 }
