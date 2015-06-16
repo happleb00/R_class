@@ -1,0 +1,29 @@
+## "Write a function that reads a directory full of files
+## and reports the number of completely observed cases in
+## each data file. The function should return a data frame
+## where the first column is the name of the file and the
+## second column is the number of complete cases."
+
+## when i run this with just "sum(complete.cases(dat))", the
+## data frame looks like this:
+##   id nobs
+## 1 30  463
+## 2 29  463
+## 3 28  463
+## 4 27  463
+## 5 26  463
+## 6 25  463
+## where 463 is the nobs for only id #25
+## i need to figure out a way to get the nobs for each id
+
+complete <- function(directory, id = 1:332) {
+  files_list <- list.files(directory, full.names = TRUE)
+  for (i in id) {
+    dat <- read.csv(files_list[i])
+    nobs <- sum(complete.cases(dat))
+  }
+
+  data.frame(id, nobs)
+}
+
+complete("specdata", 30:25)

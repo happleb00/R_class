@@ -8,3 +8,5 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
 		}
 	mean(dat[,pollutant], na.rm=TRUE)                            ##what i want to do with the data called
 }
+
+pollutantmean("specdata", "sulfate", 1:10)
