@@ -1,4 +1,4 @@
-##need to add text about the file here
+##create a function that will calculate the mean of one of two pollutants from 332 .csv files
 
 pollutantmean <- function(directory, pollutant, id = 1:332) {
 	files_list <- list.files(directory, full.names = TRUE)       ##calls data from all .csv in the folder
