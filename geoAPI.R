@@ -3,15 +3,18 @@
 #june 17, 2015
 #for windows? install.packages("ridigbio")
 
-
 #had to download mac binaries and install from desktop to get to work
 install.packages("devtools")
 library(devtools)
-#http://cran.r-project.org/web/packages/ridigbio/index.html
-install.packages("/Users/kseltmann/Downloads/ridigbio_0.2.2.tgz", repos=NULL, dependencies=TRUE)
+install.packages("ridigbio")
 library(ridigbio)
-install.packages("jsonlite")
-install.packages("rjson")
+
+#ignore this below, only if on a pesky mac
+#http://cran.r-project.org/web/packages/ridigbio/index.html
+#install.packages("/Users/kseltmann/Downloads/ridigbio_0.2.2.tgz", repos=NULL, dependencies=TRUE)
+#library(ridigbio)
+#install.packages("jsonlite")
+#install.packages("rjson")
 
 #examples from idigibo documentation
 idig_search_records(rq=list(genus="acer"))
@@ -40,7 +43,7 @@ idig_meta_fields()
 #country is mexico
 idig_count_records(rq=list(country="Mexico"))
 
-
+#returns all of the stateProv
 query <- list("country"="Mexico")
 df <- idig_search_records(rq=query, limit=100)
 df$stateprovince
