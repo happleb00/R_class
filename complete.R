@@ -27,3 +27,16 @@ complete <- function(directory, id = 1:332) {
 }
 
 complete("specdata", 30:25)
+
+
+#------------ I pulled it out of the function so you can see what you are doing better.
+id = 1:3
+
+files_list <- list.files("data_to_use", full.names = TRUE)
+  for (i in id) {
+    dat <- read.csv(files_list[i])
+    nobs <- sum(complete.cases(dat))
+  }
+  
+  data.frame(id, nobs)
+}
