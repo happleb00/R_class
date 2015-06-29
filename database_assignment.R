@@ -1,33 +1,38 @@
 mexlocfull <- read.table("PBI_Mexico_data.txt", header = TRUE, sep = "\t" ,fill = TRUE, stringsAsFactors = FALSE)
 
+
+##data frame of relevant Mexico locality data:
 mexloc <- mexlocfull[,c(4:9)]
 #head(mexloc)
 
-##how to subset mexloc Localities
+
+## how to subset mexloc Localities - not sure if I will use this for anything yet:
 #mexlocsub <- subset(mexloc, select = Locality)
 #summary(mexlocsub)
 #head(mexlocsub)
 
+## prints TRUE or FALSE for each row.
+## TRUE - duplicate locality
+## FALSE - there is no duplicate or the first of a set of duplicate localities is read.
+dupe <- duplicated(mexloc)
+#head(dupe)
+
+## list of unique duplicated localities
 unqloc <- unique(mexloc, nmax=1)
+#unqloc <- unique(mexloc[duplicated(mexloc),]) also works
 #summary(unqloc)
 #head(unqloc)
-
-##how to subset unique Localities
-#unqlocsub <- subset(unqloc, select = Locality)
-#head(unqlocsub)
-#all.equal(mexlocsub, unqloc)
 
 
 
 for (i in 1:300){
-  allfiles <- mexloc[i,]
-  dupes <- duplicated(allfiles)
-  return <- ifelse(subset(dupes, select = 1)==TRUE, print(hello), print(no))
+  listfiles <- mexloc[i,]
+  dupelist <- unique(mexloc[i,], nmax=1)
+  return <-  ifelse(listfiles==dupelist, print(i))
 }
-head(return)
-#head(allfiles)
-#head(dupes)
-
+#head(listfiles) this is only printing the last value(300)
+#head(dupelist) also only printing the last value(300)
+return
 
 
 help(unique)
@@ -36,3 +41,5 @@ help("all.equal")
 help("Compare")
 help("match")
 help(ifelse)
+help(rbind)
+help(order)
