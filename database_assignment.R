@@ -18,22 +18,16 @@ unqloc <- unique(mexloc, nmax=1)
 #all.equal(mexlocsub, unqloc)
 
 
-dupes <- duplicated(mexloc)
-return <- if (dupes=TRUE, print(subset(mexloc, select = Locality)))
-return
 
-for (i in 1:10){
-  dupes <- duplicated(mexloc[1:10])
-  #head(dupes)
-  return <- if (dupes$1 = TRUE, print(subset(mexloc[i], select = Locality)))
+for (i in 1:300){
+  allfiles <- mexloc[i,]
+  dupes <- duplicated(allfiles)
+  return <- ifelse(subset(dupes, select = 1)==TRUE, print(hello), print(no))
 }
-return
+head(return)
+#head(allfiles)
+#head(dupes)
 
-
-for (i in 1:10){
-  return1 <- print(mexloc[i])
-}
-return1
 
 
 help(unique)
@@ -41,3 +35,4 @@ help("duplicated")
 help("all.equal")
 help("Compare")
 help("match")
+help(ifelse)
