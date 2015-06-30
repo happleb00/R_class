@@ -16,8 +16,11 @@
 ## where 463 is the nobs for only id #25
 ## i need to figure out a way to get the nobs for each id
 
+setwd("C:/Users/HLA/Documents")
+
 complete <- function(directory, id = 1:332) {
   files_list <- list.files(directory, full.names = TRUE)
+  nobsdata <- data.frame()
   for (i in id) {
     dat <- read.csv(files_list[i])
     nobs <- sum(complete.cases(dat))
@@ -30,13 +33,42 @@ complete("specdata", 30:25)
 
 
 #------------ I pulled it out of the function so you can see what you are doing better.
-id = 1:3
-
+id <-  1:3
+#help(list.files)
 files_list <- list.files("data_to_use", full.names = TRUE)
-  for (i in id) {
+  nobsdat <- data.frame()
+  for (i in 1:3) {
     dat <- read.csv(files_list[i])
     nobs <- sum(complete.cases(dat))
+    nobsdat <- rbind(nobsdat, c(i, nobs))
+   # print(nobs)
+    head(dat)
   }
   
-  data.frame(id, nobs)
-}
+  nobsdat[1,]
+  
+  
+  
+  
+  
+  
+  
+  ###summed the number of cases of nitrate and sulfate then renamed the columns:
+  
+  
+  id <-  1:3
+  #help(list.files)
+  files_list <- list.files("data_to_use", full.names = TRUE)
+  sumdat <- data.frame()
+  for (i in 1:3) {
+    dat <- read.csv(files_list[i])
+    sulfatesum <- sum(complete.cases(dat$sulfate))
+    nitratesum <- sum(complete.cases(dat$nitrate))
+    sumdat <- rbind(sumdat, c(i, sulfatesum, nitratesum))
+    # print(nobs)
+    head(dat)
+    colnames(sumdat) <- c("ID", "sulfate", "nitrate")
+  }
+  
+ sumdat
+ 
