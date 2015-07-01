@@ -2,6 +2,7 @@ mexlocfull <- read.table("PBI_Mexico_data.txt", header = TRUE, sep = "\t" ,fill 
 
 
 ###########TODO - subset based on a STate_Prov
+###########TODO - write to a .tsv file
 
 
 #Version 1: Finds a series of localities and compares to itself, adds if dup to dataframe
