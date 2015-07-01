@@ -30,30 +30,31 @@ head(unqloc)
 for (i in 1:300){
   listfiles <- mexloc[i,]
   dupelist <- unique(mexloc[i,], nmax=1)
-  return <-  ifelse(listfiles==dupelist, print(i)) ##my idea was to see if I am able to find the duplicates then print a UID # to locate them
+  return <-  ifelse(listfiles==dupelist, print(i), print("no")) ##my idea was to see if I am able to find the duplicates then print a UID # to locate them
 }
 #head(listfiles) this is only printing the last value(300)
 #head(dupelist) also only printing the last value(300)
 return
 
 
-#Finds a series of localities and compares to itself, adds if dup to dataframe
-#=======================================
-mexloc <- unique(mexlocfull[,c(4:9)])
-mexloc.locality <- subset(mexloc, select = Locality) #same as mexloc$locality?
 
-head(mexloc)
-nrow(mexloc)
-
-for (i in mexloc){
-  dupe <- duplicated(i) #how to make this test more fuzzy? #how to compare 2 different files?
-}
-mexdup <- cbind(mexloc, dupe)
-head(mexdup)
-#=======================================
 
 
 help(subset)
+
+
+## a different approach with nested for loops
+for (i in 1:10){
+  for (j in 1:10){
+    return <-  ifelse(unqloc[i,]==mexloc[j,], print(i), print("no"))
+  }
+}
+#head(listfiles) this is only printing the last value(300)
+#head(dupelist) also only printing the last value(300)
+return
+
+help(unique)
+
 help("duplicated")
 help("all.equal")
 help("Compare")
