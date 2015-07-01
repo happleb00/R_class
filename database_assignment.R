@@ -37,7 +37,20 @@ for (i in 1:300){
 return
 
 
+#Finds a series of localities and compares to itself, adds if dup to dataframe
+#=======================================
+mexloc <- unique(mexlocfull[,c(4:9)])
+mexloc.locality <- subset(mexloc, select = Locality) #same as mexloc$locality?
 
+head(mexloc)
+nrow(mexloc)
+
+for (i in mexloc){
+  dupe <- duplicated(i) #how to make this test more fuzzy? #how to compare 2 different files?
+}
+mexdup <- cbind(mexloc, dupe)
+head(mexdup)
+#=======================================
 
 
 help(subset)
