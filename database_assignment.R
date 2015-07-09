@@ -11,14 +11,16 @@ dupelist <- unique(mexloc$Locality)
 head(dupelist)
 for (i in dupelist){
   listfiles <- mexloc$Locality
-  head(listfiles)
-  somevariable <-  ifelse(i in listfiles > 1, TRUE, FALSE) 
+  #head(listfiles)
+  somevariable <-  ifelse(dupelist$Locality > 1, TRUE, FALSE) 
   }
 
   somevariable
+  
+  help(ifelse)
 
 #TODO add cbind to mexloc
-help(return)
+
 #=======================================
 
 
@@ -54,12 +56,55 @@ for (i in 1:10){
 #head(dupelist) also only printing the last value(300)
 return
 
-help(unique)
 
-help("duplicated")
-help("all.equal")
-help("Compare")
-help("match")
-help(ifelse)
-help(rbind)
-help(order)
+
+#####=====NEW 7/9/15=========
+##### Prints State_Prov for duplicates
+
+
+mex <- mexlocfull[1:10,c(4:9)]
+mexloc <- unique(mexlocfull[,c(4:9)])
+mex.locality <- subset(mex, select = Locality)
+#print(mex)
+#print(mex.locality)
+
+for (i in mex.locality){
+  dupe <- duplicated(i)
+  }
+  #print(dupe)
+
+mexdup <- cbind(mex, dupe)
+mexdup.dupe <- subset(mexdup, select = dupe)
+#print(mexdup)
+  
+dupeid <- function(dupe){
+  ifelse(mexdup.dupe==TRUE, print(mexdup$State_Prov), print(mexdup$Locality))
+  }
+
+  dupeid(1:10)
+  
+  
+  
+#########Print dupes in a specific State_Prov
+
+  
+  mex <- mexlocfull[c(4:9)]
+  mexloc <- unique(mexlocfull[,c(4:9)])
+  mex.locality <- subset(mex, select = Locality)
+  mex.states <- subset(mex, select = State_Prov)
+  #print(mex)
+  #print(mex.locality)
+  
+  for (i in mex.locality){
+    dupe <- duplicated(i)
+  }
+  #print(dupe)
+  
+  mexdup <- cbind(mex, dupe)
+  
+  dupes <- function(State_Prov){
+    ifelse(mexdup.dupe==TRUE, print(mexdup$Locality), print("NA"))
+  }
+  
+  dupes("Veracruz[1:10]")
+  
