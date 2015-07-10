@@ -7,15 +7,16 @@ mexlocfull <- read.table("PBI_Mexico_data.txt", header = TRUE, sep = "\t" ,fill 
 #Version 1: Finds a series of localities and compares to itself, adds if dup to dataframe
 #=======================================
 
-dupelist <- unique(mexloc$Locality)
-head(dupelist)
+mexloc <- unique(mexlocfull[,c(4:9)])
+#dupelist <- unique(mexloc$Locality)
+#head(dupelist)
 for (i in dupelist){
   listfiles <- mexloc$Locality
   #head(listfiles)
-  somevariable <-  ifelse(dupelist$Locality > 1, TRUE, FALSE) 
+  duplicates <-  ifelse(mexloc$Locality > 2, TRUE, FALSE) 
   }
-
-  somevariable
+  test <- cbind(mexloc, duplicates)
+  head(test)
   
   help(ifelse)
 
@@ -26,16 +27,13 @@ for (i in dupelist){
 
 #Version 2: Finds a series of localities and compares to itself, adds if dup to dataframe
 #=======================================
-mexloc <- unique(mexlocfull[,c(4:9)])
+mex <- mexlocfull[,c(4:9)]
 mexloc.locality <- subset(mexloc, select = Locality) #same as mexloc$locality?
 
-head(mexloc)
-nrow(mexloc)
-
-for (i in mexloc){
+for (i in mex){
   dupe <- duplicated(i) #TODO: how to make this test more fuzzy? 
 }
-mexdup <- cbind(mexloc, dupe)
+mexdup <- cbind(mexloc2, dupe)
 head(mexdup)
 #=======================================
 
@@ -88,8 +86,8 @@ dupeid <- function(dupe){
 #########Print dupes in a specific State_Prov
 
   
-  mex <- mexlocfull[c(4:9)]
-  mexloc <- unique(mexlocfull[,c(4:9)])
+  mex <- mexlocfull[c(4:9), StringsAsFactors=FALSE]
+  mexloc <- unique(mexlocfull[,c(4:9)], StringsAsFactors=FALSE)
   mex.locality <- subset(mex, select = Locality)
   mex.states <- subset(mex, select = State_Prov)
   #print(mex)
@@ -107,4 +105,34 @@ dupeid <- function(dupe){
   }
   
   dupes("Veracruz[1:10]")
+  
+  
+  
+  ###########7/10/15 -- print dupes by locality search (fuzzy?)--
+  
+  mex <- mexlocfull[c(4:9), stringsAsFactors=FALSE]
+  mex.unique <- unique(mex, stringsAsFactors=FALSE)
+  mex.locality <- subset(mex, select = Locality, stringsAsFactors=FALSE)
+  mex.locality.unique <- unique(mex.locality, stringsAsFactors=FALSE)
+  #head(mex.locality)
+  #head(mex.locality.unique)
+  #head(mex.unique)
+
+
+  for (i in mex.locality.unique){
+    for (j in mex.locality){
+      match.test <- match("19 km E of El Rosario (km 47)" %in% mex.locality.unique[[i]], "19 km E of El Rosario (km 47)" %in% mex.locality[[j]], nomatch = NA_integer_, incomparables = NULL)
+       
+    }
+  }
+  
+ return(match.test)
+  
+match(mex.unique[[c(1)]], mex[[c(1)]])
+
+match("1.5 mi W of Parque Sierra San Pedro Martir" %in% mex.locality.unique[[1]], "1.5 mi W of Parque Sierra San Pedro Martir" %in% mex.locality[[1]])
+
+  
+  help("match")
+  
   
