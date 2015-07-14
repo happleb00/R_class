@@ -5,6 +5,7 @@ mexlocfull <- read.table("PBI_Mexico_data.txt", header = TRUE, sep = "\t" ,fill 
 ###########TODO - write to a .tsv file
 
 
+
 #Version 1: Finds a series of localities and compares to itself, adds if dup to dataframe
 #=======================================
 
@@ -105,11 +106,11 @@ dupeid <- function(dupe){
     ifelse(mexdup.dupe==TRUE, print(mexdup$Locality), print("NA"))
   }
   
-  dupes("Veracruz[1:10]")
+  dupes("Veracruz")
   
   
   
-  ###########7/10/15 -- print dupes by locality search (fuzzy?)--
+  ###########7/14/15 -- print dupes by locality search (fuzzy?)--
   
   mex <- mexlocfull[c(4:9), stringsAsFactors=FALSE]
   mex.unique <- unique(mex, stringsAsFactors=FALSE)
@@ -119,21 +120,22 @@ dupeid <- function(dupe){
   #head(mex.locality.unique)
   #head(mex.unique)
 
-
+  
+  
   for (i in mex.locality.unique){
-    for (j in mex.locality){
-      match.test <- match("19 km E of El Rosario (km 47)" %in% mex.locality.unique[[i]], "19 km E of El Rosario (km 47)" %in% mex.locality[[j]], nomatch = NA_integer_, incomparables = NULL)
-       
-    }
+      match.test <- match(i, mex.locality, nomatch = NA_integer_, incomparables = NULL)
   }
   
  return(match.test) ##why using return here? is this a function?
   
 match(mex.unique[[c(1)]], mex[[c(1)]])
 
+
+
 match("1.5 mi W of Parque Sierra San Pedro Martir" %in% mex.locality.unique[[1]], "1.5 mi W of Parque Sierra San Pedro Martir" %in% mex.locality[[1]])
 
   
+
   help("match")
   help("if")
 
@@ -158,4 +160,5 @@ for (i in mex.unique) {
   out <- c(j,num)
 }
 if(out[num] == 2) print(out[j])
+
   
