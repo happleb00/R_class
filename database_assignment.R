@@ -140,25 +140,37 @@ match("1.5 mi W of Parque Sierra San Pedro Martir" %in% mex.locality.unique[[1]]
   help("if")
 
 
-##
+#===================================
+#===================================
+#new packages to play with
+install.packages("plyr") #do only once
+library("plyr")
+
+##add an identifier row Katja July 14
+setwd("~/Desktop/Dropbox/RClassHeather/R_class")
 mexlocfull <- read.table("PBI_Mexico_data.txt", header = TRUE, sep = "\t" ,fill = TRUE, stringsAsFactors = FALSE)
 head(mexlocfull)
+mexlocfull$generated_uid <- 1:nrow(mexlocfull)
+ncol(mexlocfull) #see how many columns there are in data frame
 
-mex <- mexlocfull[c(4:9)]
+mex <- mexlocfull[c(4:9,54)] #54 is the newly generated column
 head(mex)
+mexlocSonora <- subset(mexlocfull, State_Prov == "Sonora", select = c(4:9,54))
+head(mexlocSonora)
 
-mex.unique <- unique(mex$Locality)
-mex.locality <- subset(mex, select = Locality)
-head(mex.unique)
-summarise(group_by(mex,Locality),length(Locality))
+numbers <- subset(count(mexlocSonora, "Locality"), freq > 1)
+counts <- count(mexlocSonora, c("Locality", "State_Prov"))
+numbers
+counts
 
-num = 0
-for (i in mex.unique) {
-  for (j in mex.locality) {
-    if (i == j) num = 2
-  }
-  out <- c(j,num)
+nrow(mexlocSonora)
+uniqueSenora <- unique(mexlocSonora$Locality) 
+
+"%in%" <- function(x, table) match(x, table, nomatch = 0) > 10#can modify your %in%
+indexes <- which(mexlocSonora$Locality %in% uniqueSenora)
+for(i in indexes){
+  print(mexlocSonora[i,"Locality"])
 }
-if(out[num] == 2) print(out[j])
 
-  
+
+
