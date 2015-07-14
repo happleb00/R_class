@@ -140,25 +140,6 @@ match("1.5 mi W of Parque Sierra San Pedro Martir" %in% mex.locality.unique[[1]]
   help("if")
 
 
-##
-mexlocfull <- read.table("PBI_Mexico_data.txt", header = TRUE, sep = "\t" ,fill = TRUE, stringsAsFactors = FALSE)
-head(mexlocfull)
 
-mex <- mexlocfull[c(4:9)]
-head(mex)
-
-mex.unique <- unique(mex$Locality)
-mex.locality <- subset(mex, select = Locality)
-head(mex.unique)
-summarise(group_by(mex,Locality),length(Locality))
-
-num = 0
-for (i in mex.unique) {
-  for (j in mex.locality) {
-    if (i == j) num = 2
-  }
-  out <- c(j,num)
-}
-if(out[num] == 2) print(out[j])
 
   
