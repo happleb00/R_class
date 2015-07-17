@@ -146,6 +146,8 @@ match("1.5 mi W of Parque Sierra San Pedro Martir" %in% mex.locality.unique[[1]]
 install.packages("plyr") #do only once
 library("plyr")
 
+  
+  
 ##add an identifier row Katja July 14
 setwd("~/Desktop/Dropbox/RClassHeather/R_class")
 mexlocfull <- read.table("PBI_Mexico_data.txt", header = TRUE, sep = "\t" ,fill = TRUE, stringsAsFactors = FALSE)
@@ -163,14 +165,18 @@ counts <- count(mexlocSonora, c("Locality", "State_Prov"))
 numbers
 counts
 
-nrow(mexlocSonora)
 uniqueSenora <- unique(mexlocSonora$Locality) 
+#remove commas, periods and white space (grep)
+#uniqueSenora only be georeferenced localities
+#mexlocSonora subset on those not georefernced
 
-"%in%" <- function(x, table) match(x, table, nomatch = 0) > 10#can modify your %in%
-indexes <- which(mexlocSonora$Locality %in% uniqueSenora)
+"%in%" <- function(x, table) match(x, table, nomatch = 0) > 50 #can modify your %in%
+indexes <- which(mexlocSonora$Locality %in% uniqueSenora) #return of index
 for(i in indexes){
   print(mexlocSonora[i,"Locality"])
 }
 
+help("match")
+help("which")
 
 
