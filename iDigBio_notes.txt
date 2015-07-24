@@ -1,0 +1,10 @@
+Dowloaded error files should be renamed so that they are unique
+to the specified error.
+
+Many rev_lon_sign localities have correct longitudes. The closeness
+of the locality to the county border could be casuing this error.
+
+- dwc_stateprovince_replaced: Errors in Baja California Norte and Washington, DC
+- rev_geocode_mismatch: what does this mean?
+- dwc_country_replaced: All Baja California Norte
+- rev_geocode_lon_sign: 
